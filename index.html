@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#047857" />
+  <title>Reef Guardian's Turtle Hatchery Portal | Lankayan Island</title>
+  <meta
+    name="description"
+    content="Live and past sea turtle nest information from the Reef Guardian hatchery on Lankayan Island, Sugud Islands Marine Conservation Area, Sabah."
+  />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- ============================================================
+       HEADER / BRANDING
+       ============================================================ -->
+  <header class="site-header">
+    <div class="site-header__inner">
+
+      <!-- LEFT: logo + titles -->
+      <div class="brand">
+        <img
+          src="rglogo.png"
+          alt="Reef Guardian — non-profit organisation"
+          class="brand__logo"
+        />
+        <div class="brand__text">
+          <p class="brand__eyebrow">Reef Guardian's</p>
+          <h1 class="brand__title">Sea Turtle Hatchery</h1>
+        </div>
+      </div>
+
+      <!-- RIGHT: location details -->
+      <div class="site-header__meta">
+        <p class="site-header__subtitle">Lankayan Island Sea Turtle Conservation</p>
+        <p class="site-header__note">Sugud Islands Marine Conservation Area (SIMCA) · Lankayan Island · Sabah · Malaysia</p>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ============================================================
+       SEARCH & FILTER BAR (sticky on scroll)
+       ============================================================ -->
+  <section class="controls" aria-label="Search and filter nests">
+    <div class="controls__inner">
+
+      <!-- Search box -->
+      <div class="field field--search">
+        <label class="sr-only" for="searchInput">Search nests</label>
+        <svg class="field__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"></circle>
+          <line x1="20" y1="20" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input
+          id="searchInput"
+          type="search"
+          class="input"
+          placeholder="Search nest # or adopter name…"
+          autocomplete="off"
+          spellcheck="false"
+        />
+      </div>
+
+      <!-- Year filter -->
+      <div class="field">
+        <label class="sr-only" for="yearFilter">Filter by nesting season year</label>
+        <select id="yearFilter" class="select">
+          <option value="all">All Years</option>
+        </select>
+      </div>
+
+      <!-- Status filter -->
+      <div class="field">
+        <label class="sr-only" for="statusFilter">Filter by nest status</label>
+        <select id="statusFilter" class="select">
+          <option value="all">All Statuses</option>
+          <option value="Incubating">Incubating</option>
+          <option value="Expecting Soon">Expecting Soon</option>
+          <option value="Hatched">Hatched</option>
+        </select>
+      </div>
+      <!-- Adoption filter (NEW) -->
+      <div class="field">
+        <label class="sr-only" for="adoptionFilter">Filter by adoption availability</label>
+        <select id="adoptionFilter" class="select">
+          <option value="all">All Adoption</option>
+          <option value="available">Available for Adoption</option>
+          <option value="adopted">Adopted</option>
+        </select>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       MAIN CONTENT
+       ============================================================ -->
+  <main class="main">
+    <p class="result-count" id="resultCount" aria-live="polite"></p>
+
+    <!-- Nest cards are rendered here by script.js -->
+    <section class="nest-grid" id="nestGrid" aria-label="Sea turtle nests"></section>
+
+    <!-- Shown when no nests match the current filters -->
+    <div class="empty-state" id="emptyState" role="status">
+      <span class="empty-state__icon" aria-hidden="true">🔍</span>
+      <h2 class="empty-state__title">No nests found matching your query.</h2>
+      <p class="empty-state__text">Try a different nest number, adopter name, year or status.</p>
+      <button type="button" class="btn btn--ghost" id="clearFiltersBtn">Clear all filters</button>
+    </div>
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="site-footer">
+    <p>
+      Data is updated daily by Reef Guardian hatchery staff.<br />
+      Please comply with all hatchery guidelines and keep noise to a minimum.
+    </p>
+    <p class="site-footer__small">© <span id="footerYear">2026</span> Reef Guardian · Lankayan Island <br /> © Fazree · All Rights Reserved</p>
+  </footer>
+
+  <!-- ============================================================
+       NEST DETAIL MODAL
+       ============================================================ -->
+  <div class="modal-overlay" id="modalOverlay" aria-hidden="true">
+    <div class="modal" id="nestModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+
+      <button type="button" class="modal__close" id="modalClose" aria-label="Close nest details">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+             stroke-linecap="round" aria-hidden="true">
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+        </svg>
+      </button>
+
+      <header class="modal__header">
+        <p class="modal__eyebrow">Hatchery Nest Record</p>
+        <h2 class="modal__title" id="modalTitle">Nest #00</h2>
+        <span class="badge badge--incubating" id="modalBadge">Incubating</span>
+      </header>
+
+      <div class="modal__body" id="modalBody">
+        <!-- Detail rows injected by script.js -->
+      </div>
+
+      <p class="modal__footnote">
+        Incubation days are calculated automatically each day from the date the eggs were laid.
+      </p>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       SCRIPTS  (order matters: data first, then logic)
+       ============================================================ -->
+  <script src="nests.js" defer></script>
+  <script src="script.js" defer></script>
+</body>
+</html>
